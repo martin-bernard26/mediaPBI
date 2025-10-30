@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psikologi Pendidikan - Materi Lengkap</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --accent-color: #f39c12;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --white: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--white);
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links li a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+        }
+
+        .content-section {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .chapter {
+            margin-bottom: 50px;
+        }
+
+        .chapter h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .sub-chapter {
+            margin-bottom: 30px;
+        }
+
+        .sub-chapter h3 {
+            color: var(--secondary-color);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .sub-chapter ul, .sub-chapter ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .sub-chapter li {
+            margin-bottom: 10px;
+        }
+
+        .definition {
+            background-color: #eaf7ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .example {
+            background-color: #fff8e1;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .key-point {
+            background-color: #f0f8ff;
+            border-left: 4px solid #00bcd4;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* Sidebar */
+        aside {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-title {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 12px;
+        }
+
+        .toc-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .toc-link:hover, .toc-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p, .footer-section ul {
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-light);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+            
+            aside {
+                position: static;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <h1><i class="fas fa-brain"></i> Psikologi Pendidikan</h1>
+            <p>Materi Lengkap untuk Mahasiswa Bahasa Indonesia</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <a href="#"><i class="fas fa-book-open"></i> EduPsych</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#pendahuluan">Pendahuluan</a></li>
+                <li><a href="#teori-belajar">Teori Belajar</a></li>
+                <li><a href="#motivasi-belajar">Motivasi Belajar</a></li>
+                <li><a href="#perbedaan-individu">Perbedaan Individu</a></li>
+                <li><a href="#evaluasi-pembelajaran">Evaluasi Pembelajaran</a></li>
+                <li><a href="#psikologi-kelas">Psikologi Kelas</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <section class="content-section">
+            <!-- Chapter 1: Pendahuluan -->
+            <article id="pendahuluan" class="chapter">
+                <h2>Pendahuluan: Pengertian dan Ruang Lingkup Psikologi Pendidikan</h2>
+                
+                <div class="sub-chapter">
+                    <h3>1.1 Definisi Psikologi Pendidikan</h3>
+                    <p>Psikologi Pendidikan adalah cabang ilmu psikologi yang mempelajari proses belajar dan pengajaran dalam konteks pendidikan formal maupun non-formal.</p>
+                    
+                    <div class="definition">
+                        <strong>Definisi Resmi:</strong> Menurut Slameto (2003), "Psikologi pendidikan adalah cabang psikologi yang mempelajari perilaku manusia dalam situasi pendidikan."
+                    </div>
+                    
+                    <p>Fokus utama psikologi pendidikan meliputi:</p>
+                    <ul>
+                        <li>Proses belajar siswa</li>
+                        <li>Interaksi guru-siswa</li>
+                        <li>Faktor-faktor yang mempengaruhi hasil belajar</li>
+                        <li>Evaluasi pembelajaran</li>
+                    </ul>
+                </div>
+
+                <div class="sub-chapter">
+                    <h3>1.2 Sejarah Perkembangan Psikologi Pendidikan</h3>
+                    <ol>
+                        <li><strong>Tahun 1900-an Awal:</strong> Wilhelm Wundt mendirikan laboratorium psikologi pertama di Leipzig, Jerman</li>
+                        <li><strong>Tahun 1910-an:</strong> Edward Thorndike mengembangkan teori koneksionisme dan hukum efek</li>
+                        <li><strong>Tahun 1920-an:</strong> Jean Piaget mengembangkan teori perkembangan kognitif anak</li>
+                        <li><strong>Tahun 1950-an:</span>: B.F. Skinner mengembangkan teori behaviorisme operan</li>
+                        <li><strong>Tahun 1960-an:</strong> Jerome Bruner mengembangkan teori konstruktivisme</li>
+                    </ol>
+                </div>
+
+                <div class="sub-chapter">
+                    <h3>1.3 Tujuan Psikologi Pendidikan</h3>
+                    <ul>
+                        <li>Mengoptimalkan proses belajar mengajar</li>
+                        <li>Meningkatkan kualitas pendidikan</li>
+                        <li>Memahami karakteristik peserta didik</li>
+                        <li>Membantu guru dalam merencanakan pembelajaran</li>
+                        <li>Meningkatkan motivasi belajar siswa</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Chapter 2: Teori Belajar -->
+            <article id="teori-belajar" class="chapter">
+                <h2>Teori Belajar dalam Psikologi Pendidikan</h2>
+                
+                <div class="sub-chapter">
+                    <h3>2.1 Teori Behaviorisme</h3>
+                    <p>Teori behaviorisme menekankan pada perilaku yang dapat diamati dan dipelajari melalui interaksi dengan lingkungan.</p>
+                    
+                    <div class="example">
+                        <strong>Contoh Prinsip Behaviorisme:</strong>
+                        <ul>
+                            <li>Hukum Efek (Thorndike): Respon yang diikuti oleh kepuasan akan diperkuat</li>
+                            <li>Conditioning Klasik (Pavlov): Stimulus netral menjadi stimulus kondisional setelah dikombinasikan dengan stimulus tak kondisional</li>
+                            <li>Conditioning Operan (Skinner): Perilaku dipengaruhi oleh konsekuensinya</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="sub-chapter">
+                    <h3>2.2 Teori Kognitivisme</h3>
+                    <p>Teori kognitivisme menekankan pada proses mental dalam belajar, termasuk pemrosesan informasi, memori, dan penalaran.</p>
+                    
+                    <div class="key-point">
+                        <strong>Konsep Penting:</strong>
+                        <ul>
+                            <li>Schema (Piaget): Kerangka kognitif yang membentuk pemahaman</li>
+                            <li>Metakognisi: Kesadaran tentang proses berpikir sendiri</li>
+                            <li>Cognitive Load Theory: Beban kognitif yang dialami saat belajar</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="sub-chapter">
+                    <h3>2.3 Teori Konstruktivisme</h3>
+                    <p>Teori konstruktivisme menyatakan bahwa pengetahuan dibangun oleh individu melalui interaksi dengan lingkungannya.</p>
+                    
+                    <p>Berikut beberapa tokoh penting:</p>
+                    <ul>
+                        <li><strong>Jean Piaget:</strong> Teori perkembangan kognitif anak</li>
+                        <li><strong>Lev Vygotsky:</strong> Teori sosial kultural dan Zona Perkembangan Proksimal (ZPP)</li>
+                        <li><strong>Jerome Bruner:</strong> Discovery Learning dan Spiral Curriculum</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Chapter 3: Motivasi Belajar -->
+            <article id="motivasi-belajar" class="chapter">
+                <h2>Motivasi Belajar dan Faktor yang Mempengaruhinya</h2>
+                
+                <div class="sub-chapter">
+                    <h3>3.1 Jenis-Jenis Motivasi</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                        <tr>
+                            <th style="background: #3498db; color: white; padding: 12px;">Jenis Motivasi</th>
+                            <th style="background: #3498db; color: white; padding: 12px;">Ciri-Ciri</th>
+                            <th style="background: #3498db; color: white; padding: 12px;">Contoh</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 1px solid #ddd;"><strong>Intrinsic</strong></td>
+                            <td style="padding: 12px; border: 1px solid #ddd;">Dari dalam diri sendiri</td>
+                            <td style="padding: 12px; border: 1px solid #ddd;">Minat belajar karena suka</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 1px solid #ddd;"><strong>Extrinsic</strong></td>
+                            <td style="padding: 12px; border: 1px solid #ddd;">Dari luar diri</td>
+                            <td style="padding: 12px; border: 1px solid #ddd;">Belajar demi nilai, hadiah</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="sub-chapter">
+                    <h3>3.2 Teori Motivasi</h3>
+                    <ul>
+                        <li><strong>Theory of Self-Determination (Deci & Ryan):</strong> Motivasi berasal dari kebutuhan dasar otonomi, kompetensi, dan hubungan</li>
+                        <li><strong>Theory of Achievement Motivation (McClelland):</strong> Motivasi prestasi dipengaruhi oleh kebutuhan mencapai, berhubungan, dan menghindar</li>
+                        <li><strong>Expectancy-Value Theory (Eccles):</strong> Motivasi dipengaruhi oleh harapan kesuksesan dan nilai subjektif tugas</li>
+                    </ul>
+                </div>
+
+                <div class="sub-chapter">
+                    <h3>3.3 Strategi Meningkatkan Motivasi Belajar</h3>
+                    <ol>
+                        <li>Menerapkan pembelajaran yang relevan dengan kehidupan nyata</li>
+                        <li>Memberikan umpan balik yang konstruktif</li>
+                        <li>Membuat tujuan belajar yang jelas dan realistis</li>
+                        <li>Menggunakan variasi metode pembelajaran</li>
+                        <li>Membangun iklim kelas yang positif dan mendukung</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- Chapter 4: Perbedaan Individu -->
+            <article id="perbedaan-individu" class="chapter">
+                <h2>Perbedaan Individu Siswa dalam Pembelajaran</h2>
+                
+                <div class="sub-chapter">
+                    <h3>4.1 Perbedaan Intelektual</h3>
+                    <p>Perbedaan intelektual mencakup tingkat kecerdasan, gaya belajar, dan kemampuan kognitif.</p>
+                    
+                    <div class="key-point">
+                        <strong>Gaya Belajar (VARK Model):</strong>
+                        <ul>
+                            <li><strong>Visual:</strong> Belajar melalui gambar, diagram, video</li>
+                            <li><strong>Auditori:</strong> Belajar melalui mendengarkan, diskusi</li>
+                            <li><strong>Reading/Writing:</strong> Belajar melalui baca tulis</li>
+                            <li><strong>Kinestetik:</strong> Belajar melalui aktivitas praktik, eksperimen</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="sub-chapter">
+                    <h3>4.2 Perbedaan Afektif</h3>
+                    <p>Perbedaan afektif mencakup aspek emosional, sikap, dan kepribadian siswa.</p>
+                    
+                    <ul>
+                        <li><strong>Kepribadian:</strong> Introvert vs Ekstrovert</li>
+                        <li><strong>Sikap:</strong> Optimis vs Pesimis</li>
+                        <li><strong>Emosi:</strong> Kepercayaan diri, ketakutan gagal</li>
+                        <li><strong>Nilai-nilai:</strong> Prioritas dan kepentingan</li>
+                    </ul>
+                </div>
+
+                <div class="sub-chapter">
+                    <h3>4.3 Perbedaan Psikomotor</h3>
+                    <p>Perbedaan psikomotor mencakup kemampuan fisik dan koordinasi motorik.</p>
+                    
+                    <p>Dalam konteks pendidikan, perbedaan ini penting untuk:</p>
+                    <ul>
+                        <li>Mendesain aktivitas praktik yang sesuai</li>
+                        <li>Menyediakan fasilitas belajar yang memenuhi kebutuhan</li>
+                        <li>Mengembangkan keterampilan motorik secara efektif</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- Chapter 5: Evaluasi Pembelajaran -->
+            <article id="evaluasi-pembelajaran" class="chapter">
+                <h2>Evaluasi Pembelajaran dan Penilaian Hasil Belajar</h2>
+                
+                <div class="sub-chapter">
+                    <h3>5.1 Jenis-jenis Evaluasi</h3>
+                    <ul>
+                        <li><strong>Evaluasi Formatif:</strong> Dilakukan selama proses pembelajaran untuk memantau perkembangan</li>
+                        <li><strong>Evaluasi Sumatif:</strong> Dilakukan di akhir pembelajaran untuk menilai pencapaian tujuan</li>
+                        <li><strong>Evaluasi Diagnostik:</strong> Untuk mengidentifikasi masalah belajar siswa</li>
+                        <li><strong>Evaluasi Normatif vs Kriteria:</strong> Membandingkan dengan standar kelompok vs standar mutu</li>
+                    </ul>
+                </div>
+
+                <div class="sub-chapter">
+                    <h3>5.2 Teknik Penilaian</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                        <tr>
+                            <th style="background: #3498db; color: white; padding: 12px;">Teknik Penilaian</th>
+                            <th style="background: #3498db; color: white; padding: 12px;">Ciri-ciri</th>
+                            <th style="background: #3498db; color: white; padding: 12px;">Contoh</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 1px solid #ddd;"><strong>Objektif</strong></td>
+                            <td style="padding: 12px; border: 1px solid #ddd;">Hasil yang sama untuk semua siswa</td>
+                            <td style="padding: 12px; border: 1px solid #ddd;">Tes pilihan ganda, isian singkat</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 1px solid #ddd;"><strong>Subjektif</strong></td>
+                            <td style="padding: 12px; border: 1px solid #ddd;">Bergantung pada penilaian guru</td>
+                            <td style="padding: 12px; border: 1px solid #ddd;">Esai, proyek, wawancara</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="sub-chapter">
+                    <h3>5.3 Prinsip Penilaian yang Efektif</h3>
+                    <ol>
+                        <li><strong>Relevan:</strong> Sesuai dengan tujuan pembelajaran</li>
+                        <li><strong>Valid:</strong> Mengukur apa yang seharusnya diukur</li>
+                        <li><strong>Reliabel:</strong> Hasil konsisten jika diujicobakan lagi</li>
+                        <li><strong>Adil:</strong> Memberikan kesempatan yang sama kepada semua siswa</li>
+                        <li><strong>Berkontribusi:</strong> Memberikan umpan balik yang bermanfaat</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- Chapter 6: Psikologi Kelas -->
+            <article id="psikologi-kelas" class="chapter">
+                <h2>Psikologi Kelas: Iklim dan Interaksi Kelas</h2>
+                
+                <div class="sub-chapter">
+                    <h3>6.1 Iklim Kelas yang Efektif</h3>
+                    <p>Iklim kelas yang baik ditandai dengan:</p>
+                    <ul>
+                        <li>Rasa aman dan nyaman bagi siswa</li>
+                        <li>Respect mutual antara guru dan siswa</li>
+                        <li>Kerjasama dan saling mendukung</li>
+                        <li>Toleransi terhadap perbedaan</li>
+                        <li>Kesempatan untuk berpartisipasi aktif</li>
+                    </ul>
+                </div>
+
+                <div class="sub-chapter">
+                    <h3>6.2 Interaksi Guru-Siswa</h3>
+                    <p>Interaksi yang efektif melibatkan:</p>
+                    <ul>
+                        <li><strong>Active Listening:</strong> Mendengarkan dengan penuh perhatian</li>
+                        <li><strong>Feedback Konstruktif:</strong> Umpan balik yang spesifik dan bermanfaat</li>
+                        <li><strong>Empathy:</strong> Kemampuan memahami perasaan siswa</li>
+                        <li><strong>Positive Reinforcement:</strong> Penguatan perilaku positif</li>
+                    </ul>
+                </div>
+
+                <div class="sub-chapter">
+                    <h3>6.3 Manajemen Kelas</h3>
+                    <p>Prinsip-prinsip manajemen kelas yang efektif:</p>
+                    <ol>
+                        <li>Menetapkan aturan dan prosedur yang jelas</li>
+                        <li>Konsisten dalam penerapan disiplin</li>
+                        <li>Menggunakan strategi preventif daripada reaktif</li>
+                        <li>Mengembangkan rasa tanggung jawab siswa</li>
+                        <li>Memanfaatkan waktu dan sumber daya secara optimal</li>
+                    </ol>
+                </div>
+            </article>
+        </section>
+
+        <!-- Sidebar -->
+        <aside>
+            <h3 class="sidebar-title"><i class="fas fa-list-ul"></i> Daftar Isi</h3>
+            <ul class="toc-list">
+                <li class="toc-item"><a href="#pendahuluan" class="toc-link active">Pendahuluan</a></li>
+                <li class="toc-item"><a href="#teori-belajar" class="toc-link">Teori Belajar</a></li>
+                <li class="toc-item"><a href="#motivasi-belajar" class="toc-link">Motivasi Belajar</a></li>
+                <li class="toc-item"><a href="#perbedaan-individu" class="toc-link">Perbedaan Individu</a></li>
+                <li class="toc-item"><a href="#evaluasi-pembelajaran" class="toc-link">Evaluasi Pembelajaran</a></li>
+                <li class="toc-item"><a href="#psikologi-kelas" class="toc-link">Psikologi Kelas</a></li>
+            </ul>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Tentang Kami</h3>
+                <p>Platform edukasi yang menyediakan materi lengkap untuk mahasiswa Bahasa Indonesia dalam bidang Psikologi Pendidikan.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Link Penting</h3>
+                <ul>
+                    <li><a href="#">Tentang Kami</a></li>
+                    <li><a href="#">Kontak</a></li>
+                    <li><a href="#">Syarat dan Ketentuan</a></li>
+                    <li><a href="#">Privasi</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Kontak</h3>
+                <p>Email: info@edupsych.id</p>
+                <p>Telepon: +62 21 12345678</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 EduPsych. Hak Cipta Dilindungi Undang-Undang.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Update active link in sidebar based on scroll position
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.chapter');
+            let currentSectionId = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+            
+            document.querySelectorAll('.toc-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
