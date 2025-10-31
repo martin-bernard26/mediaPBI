@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Data Mahasiswa</title>
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #e0f7fa, #ffffff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  #myForm {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 320px;
+    transition: 0.3s;
+  }
+
+  #myForm:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  }
+
+  #myForm input[type="text"],
+  #myForm input[type="email"],
+  #myForm input[type="file"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  #myForm input:focus {
+    outline: none;
+    border-color: #00acc1;
+    box-shadow: 0 0 5px rgba(0, 172, 193, 0.3);
+  }
+
+  #myForm button {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(135deg, #00acc1, #0097a7);
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #myForm button:hover {
+    background: linear-gradient(135deg, #0097a7, #00838f);
+    transform: scale(1.03);
+  }
+
+  ::placeholder {
+    color: #aaa;
+    font-style: italic;
+  }
+
+  /* Pesan status */
+  #status {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 500;
+    transition: 0.3s ease;
+  }
+
+  #status.waiting {
+    color: #f57c00;
+  }
+
+  #status.success {
+    color: #388e3c;
+  }
+</style>
+</head>
+<body>
+
+  <form id="myForm">
+    <input type="text" id="nama" placeholder="Nama" required>
+    <input type="text" id="nim" placeholder="NIM" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="file" id="file" required>
+    <button type="submit">Kirim</button>
+    <div id="status"></div>
+  </form>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx-VmAd717bfOxTyCACxYPVKKAb80DheFbn9zUBfbU-0jbqjkXGXioTIynnGNEV3_idUA/exec";
+
+    const form = document.getElementById("myForm");
+    const statusDiv = document.getElementById("status");
+
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      // Tampilkan pesan menunggu
+      statusDiv.textContent = "Menunggu, sedang proses...";
+      statusDiv.className = "waiting";
+
+      const nama = document.getElementById("nama").value;
+      const nim = document.getElementById("nim").value;
+      const email = document.getElementById("email").value;
+      const fileInput = document.getElementById("file").files[0];
+
+      try {
+        let fileData = await toBase64(fileInput);
+
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          body: new URLSearchParams({
+            nama: nama,
+            nim: nim,
+            email: email,
+            file: fileData.split(",")[1],
+            mimeType: fileInput.type,
+            filename: fileInput.name
+          })
+        });
+
+        // Jika berhasil
+        statusDiv.textContent = "Berhasil dikirim!";
+        statusDiv.className = "success";
+
+        // Reset form
+        form.reset();
+      } catch (error) {
+        console.error(error);
+        statusDiv.textContent = "Terjadi kesalahan, coba lagi!";
+        statusDiv.className = "";
+      }
+    });
+
+    // Fungsi ubah file ke base64
+    function toBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+      });
+    }
+  </script>
+
+</body>
+</html>
