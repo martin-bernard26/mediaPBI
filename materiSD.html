@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar Dongeng - SD Kelas 3</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-icons {
+            font-size: 60px;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            opacity: 0.95;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            padding: 25px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .section:hover {
+            transform: scale(1.02);
+        }
+
+        .section-title {
+            color: #d63031;
+            font-size: 2em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+        }
+
+        .icon {
+            font-size: 1.3em;
+        }
+
+        .psychology-box {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 3px dashed #6c5ce7;
+        }
+
+        .psychology-box h3 {
+            color: #6c5ce7;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+        }
+
+        .psychology-box p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .story-box {
+            background: white;
+            border: 4px solid #fdcb6e;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(253, 203, 110, 0.3);
+        }
+
+        .story-box p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .character-card {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 10px 0;
+            border-left: 6px solid #e17055;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .character-card strong {
+            color: #e17055;
+            font-size: 1.3em;
+        }
+
+        .interactive-button {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            border-radius: 30px;
+            font-size: 1.3em;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+            margin: 10px 5px;
+            font-weight: bold;
+        }
+
+        .interactive-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(245, 87, 108, 0.6);
+        }
+
+        .game-container {
+            display: none;
+            padding: 25px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            border-radius: 20px;
+            margin-top: 20px;
+            border: 4px solid #d63031;
+        }
+
+        .game-container.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .question {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #2d3436;
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 15px;
+        }
+
+        .option {
+            background: white;
+            padding: 20px;
+            margin: 12px 0;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .option:hover {
+            background: #ffeaa7;
+            border-color: #fdcb6e;
+            transform: scale(1.03);
+        }
+
+        .option.correct {
+            background: #55efc4;
+            border-color: #00b894;
+            animation: celebrate 0.5s;
+        }
+
+        .option.wrong {
+            background: #ff7675;
+            border-color: #d63031;
+            animation: shake 0.5s;
+        }
+
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .feedback {
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 15px;
+            display: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        .feedback.success {
+            background: #55efc4;
+            color: #00b894;
+            border: 3px solid #00b894;
+        }
+
+        .feedback.error {
+            background: #ff7675;
+            color: #d63031;
+            border: 3px solid #d63031;
+        }
+
+        .sticker {
+            font-size: 80px;
+            text-align: center;
+            margin: 20px 0;
+            animation: rotate 2s infinite;
+        }
+
+        @keyframes rotate {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(15deg); }
+        }
+
+        .sources {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 30px;
+        }
+
+        .sources h3 {
+            color: #6c5ce7;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .sources ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .sources li {
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid #6c5ce7;
+        }
+
+        .score-display {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.5em;
+            margin: 20px 0;
+            border: 3px solid #fdcb6e;
+        }
+
+        .learning-goal {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 3px solid #fd79a8;
+        }
+
+        .learning-goal h3 {
+            color: #d63031;
+            margin-bottom: 10px;
+            font-size: 1.6em;
+        }
+
+        .learning-goal ul {
+            margin-left: 20px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 15px;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-icons">📚✨🦊🐰</div>
+            <h1>Ayo Belajar Dongeng!</h1>
+            <p class="subtitle">Bahasa Indonesia Kelas 3 SD</p>
+        </div>
+
+        <div class="content">
+            <div class="learning-goal">
+                <h3>🎯 Tujuan Pembelajaran</h3>
+                <ul>
+                    <li>Siswa dapat memahami isi dongeng yang dibacakan</li>
+                    <li>Siswa dapat menyebutkan tokoh-tokoh dalam dongeng</li>
+                    <li>Siswa dapat menceritakan kembali dongeng dengan bahasa sendiri</li>
+                    <li>Siswa dapat mengidentifikasi pesan moral dari dongeng</li>
+                </ul>
+            </div>
+
+            <div class="psychology-box">
+                <h3>🧠 Mengapa Dongeng Penting untuk Anak SD?</h3>
+                <p><strong>Teori Piaget - Tahap Operasional Konkret (7-11 tahun):</strong></p>
+                <p>Anak SD kelas 3 belajar paling baik melalui cerita dengan tokoh dan situasi yang konkret. Dongeng membantu mengembangkan kemampuan berpikir logis dan memahami sebab-akibat.</p>
+                <br>
+                <p><strong>Teori Vygotsky - Pembelajaran Sosial:</strong></p>
+                <p>Dongeng mengajarkan nilai-nilai sosial dan moral melalui interaksi tokoh. Anak belajar tentang kebaikan, kejujuran, dan kerja sama dari karakter dalam cerita.</p>
+                <br>
+                <p><strong>Perkembangan Bahasa (Chomsky):</strong></p>
+                <p>Dongeng memperkaya kosakata anak dan melatih kemampuan mendengarkan serta bercerita. Pengulangan dan ritme dalam dongeng membantu anak mengingat kata-kata baru.</p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title"><span class="icon">📖</span> Apa Itu Dongeng?</h2>
+                <p style="font-size: 1.2em; line-height: 1.8;">Dongeng adalah <strong>cerita khayalan</strong> yang diceritakan secara turun-temurun. Dongeng biasanya mengajarkan nilai-nilai kebaikan kepada kita!</p>
+                
+                <div style="margin-top: 20px;">
+                    <div class="character-card">
+                        <strong>🦊 Ciri-Ciri Dongeng:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px; font-size: 1.1em;">
+                            <li>Ada tokoh (manusia atau hewan yang bisa bicara)</li>
+                            <li>Menceritakan kejadian yang tidak nyata</li>
+                            <li>Mengandung pesan moral (pelajaran kebaikan)</li>
+                            <li>Biasanya diawali dengan "pada zaman dahulu kala..."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title"><span class="icon">🐰</span> Dongeng: Kelinci dan Kura-Kura</h2>
+                <div class="sticker">🐰🏃💨</div>
+                
+                <div class="story-box">
+                    <p>Pada zaman dahulu, hiduplah seekor <strong>kelinci</strong> yang sangat sombong. Ia selalu membanggakan kecepatan larinya di hadapan hewan-hewan lain.</p>
+                    <br>
+                    <p>Suatu hari, <strong>kura-kura</strong> yang bijaksana menantang kelinci untuk balapan lari. Kelinci tertawa terbahak-bahak. "Bagaimana mungkin kamu bisa mengalahkanku?" kata kelinci dengan sombong.</p>
+                    <br>
+                    <p>Balapan pun dimulai! Kelinci berlari dengan sangat cepat, meninggalkan kura-kura jauh di belakang. Karena merasa pasti menang, kelinci memutuskan untuk tidur sebentar di bawah pohon.</p>
+                    <br>
+                    <p>Sementara itu, kura-kura terus berjalan dengan perlahan tapi tidak pernah berhenti. Ketika kelinci terbangun, ia terkejut melihat kura-kura sudah hampir mencapai garis finish!</p>
+                    <br>
+                    <p>Kelinci berlari sekuat tenaga, tetapi sudah terlambat. <strong>Kura-kura memenangkan perlombaan!</strong> Kelinci pun belajar bahwa kesombongan itu tidak baik.</p>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <div class="character-card">
+                        <strong>👥 Tokoh dalam Cerita:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px; font-size: 1.1em;">
+                            <li>🐰 <strong>Kelinci:</strong> Cepat berlari tapi sombong</li>
+                            <li>🐢 <strong>Kura-kura:</strong> Lambat tapi pantang menyerah dan bijaksana</li>
+                        </ul>
+                    </div>
+
+                    <div class="character-card">
+                        <strong>💡 Pesan Moral:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px; font-size: 1.1em;">
+                            <li>Jangan sombong dengan kelebihan kita</li>
+                            <li>Kerja keras lebih penting daripada bakat saja</li>
+                            <li>Pantang menyerah akan membawa kesuksesan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title"><span class="icon">🎮</span> Yuk, Main Kuis!</h2>
+                <button class="interactive-button" onclick="startGame()">🎯 Mulai Permainan</button>
+                <button class="interactive-button" onclick="showStory()">📚 Baca Dongeng Lagi</button>
+                
+                <div class="game-container" id="gameContainer">
+                    <div class="question" id="question"></div>
+                    <div id="options"></div>
+                    <div class="feedback" id="feedback"></div>
+                </div>
+
+                <div class="score-display" id="scoreDisplay" style="display: none;">
+                    <div class="sticker">🏆</div>
+                    <div id="finalScore"></div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title"><span class="icon">✍️</span> Kegiatan untuk Adik-Adik</h2>
+                <div class="character-card">
+                    <strong>📝 Tugas 1: Ceritakan Kembali</strong>
+                    <p style="margin-top: 10px; font-size: 1.1em;">Coba ceritakan kembali dongeng "Kelinci dan Kura-Kura" dengan bahasamu sendiri kepada teman atau keluarga di rumah!</p>
+                </div>
+
+                <div class="character-card">
+                    <strong>🎨 Tugas 2: Menggambar</strong>
+                    <p style="margin-top: 10px; font-size: 1.1em;">Gambarlah tokoh favoritmu dari dongeng ini. Warnai dengan indah!</p>
+                </div>
+
+                <div class="character-card">
+                    <strong>💭 Tugas 3: Pendapatmu</strong>
+                    <p style="margin-top: 10px; font-size: 1.1em;">Menurutmu, siapa yang lebih kamu sukai, kelinci atau kura-kura? Mengapa?</p>
+                </div>
+            </div>
+
+            <div class="sources">
+                <h3>📚 Sumber Belajar</h3>
+                <ul>
+                    <li><strong>Kemendikbud.</strong> (2018). <em>Buku Siswa Bahasa Indonesia Kelas 3 SD/MI.</em> Jakarta: Kementerian Pendidikan dan Kebudayaan.</li>
+                    <li><strong>Piaget, J.</strong> (1952). <em>The Origins of Intelligence in Children.</em> New York: International Universities Press.</li>
+                    <li><strong>Vygotsky, L.S.</strong> (1978). <em>Mind in Society.</em> Cambridge: Harvard University Press.</li>
+                    <li><strong>Santrock, J.W.</strong> (2014). <em>Psikologi Pendidikan.</em> Jakarta: Salemba Humanika.</li>
+                    <li><strong>Danandjaja, J.</strong> (2007). <em>Folklore Indonesia: Ilmu Gosip, Dongeng, dan Lain-lain.</em> Jakarta: Pustaka Utama Grafiti.</li>
+                    <li><strong>Nurgiyantoro, B.</strong> (2016). <em>Sastra Anak: Pengantar Pemahaman Dunia Anak.</em> Yogyakarta: Gadjah Mada University Press.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const gameQuestions = [
+            {
+                question: "Siapa yang menantang kelinci untuk balapan?",
+                options: [
+                    "🦁 Singa",
+                    "🐢 Kura-kura",
+                    "🐘 Gajah",
+                    "🦅 Burung"
+                ],
+                correct: 1,
+                explanation: "Benar! Kura-kura yang bijaksana menantang kelinci yang sombong untuk balapan!"
+            },
+            {
+                question: "Mengapa kelinci kalah dalam perlombaan?",
+                options: [
+                    "Karena kakinya sakit",
+                    "Karena dia tidur di tengah jalan",
+                    "Karena dia tersesat",
+                    "Karena dia jatuh"
+                ],
+                correct: 1,
+                explanation: "Tepat sekali! Kelinci tidur karena merasa pasti menang, tapi justru itu membuatnya kalah!"
+            },
+            {
+                question: "Apa sifat kelinci dalam dongeng ini?",
+                options: [
+                    "Baik hati dan ramah",
+                    "Pendiam dan pemalu",
+                    "Sombong dan angkuh",
+                    "Pemalas dan malas"
+                ],
+                correct: 2,
+                explanation: "Benar! Kelinci memiliki sifat sombong karena selalu membanggakan kecepatan larinya!"
+            },
+            {
+                question: "Apa pesan moral dari dongeng ini?",
+                options: [
+                    "Tidur itu penting untuk kesehatan",
+                    "Lari cepat itu keren",
+                    "Jangan sombong dan harus pantang menyerah",
+                    "Hewan harus saling berteman"
+                ],
+                correct: 2,
+                explanation: "Sangat bagus! Dongeng ini mengajarkan kita untuk tidak sombong dan selalu pantang menyerah!"
+            },
+            {
+                question: "Siapa yang memenangkan perlombaan?",
+                options: [
+                    "🐰 Kelinci",
+                    "🐢 Kura-kura",
+                    "Keduanya menang",
+                    "Tidak ada yang menang"
+                ],
+                correct: 1,
+                explanation: "Betul! Kura-kura menang karena tidak pernah menyerah meski berjalan lambat!"
+            }
+        ];
+
+        let currentQ = 0;
+        let totalScore = 0;
+
+        function startGame() {
+            const gameContainer = document.getElementById('gameContainer');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            gameContainer.classList.add('active');
+            scoreDisplay.style.display = 'none';
+            currentQ = 0;
+            totalScore = 0;
+            displayQuestion();
+        }
+
+        function showStory() {
+            const gameContainer = document.getElementById('gameContainer');
+            gameContainer.classList.remove('active');
+            window.scrollTo({
+                top: document.querySelector('.story-box').offsetTop - 100,
+                behavior: 'smooth'
+            });
+        }
+
+        function displayQuestion() {
+            const quiz = gameQuestions[currentQ];
+            document.getElementById('question').innerHTML = `<span style="color: #d63031;">Pertanyaan ${currentQ + 1}:</span><br>${quiz.question}`;
+            
+            const optionsHtml = quiz.options.map((option, index) => 
+                `<div class="option" onclick="checkAnswer(${index})">${option}</div>`
+            ).join('');
+            
+            document.getElementById('options').innerHTML = optionsHtml;
+            document.getElementById('feedback').classList.remove('show', 'success', 'error');
+        }
+
+        function checkAnswer(selected) {
+            const quiz = gameQuestions[currentQ];
+            const options = document.querySelectorAll('.option');
+            const feedback = document.getElementById('feedback');
+            
+            options.forEach(option => option.style.pointerEvents = 'none');
+            
+            if (selected === quiz.correct) {
+                options[selected].classList.add('correct');
+                feedback.innerHTML = `<div class="sticker">🎉</div>` + quiz.explanation;
+                feedback.classList.add('show', 'success');
+                totalScore += 20;
+            } else {
+                options[selected].classList.add('wrong');
+                options[quiz.correct].classList.add('correct');
+                feedback.innerHTML = `<div class="sticker">😊</div>Jawaban yang benar: ${quiz.options[quiz.correct]}<br>${quiz.explanation}`;
+                feedback.classList.add('show', 'error');
+            }
+            
+            setTimeout(() => {
+                currentQ++;
+                if (currentQ < gameQuestions.length) {
+                    displayQuestion();
+                } else {
+                    displayResult();
+                }
+            }, 3500);
+        }
+
+        function displayResult() {
+            const gameContainer = document.getElementById('gameContainer');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const finalScore = document.getElementById('finalScore');
+            
+            gameContainer.classList.remove('active');
+            scoreDisplay.style.display = 'block';
+            
+            let message = '';
+            let sticker = '';
+            
+            if (totalScore === 100) {
+                message = 'SEMPURNA! Kamu hebat sekali! 🌟';
+                sticker = '🏆🎉✨';
+            } else if (totalScore >= 80) {
+                message = 'BAGUS SEKALI! Kamu pintar! 👏';
+                sticker = '⭐🎈🎊';
+            } else if (totalScore >= 60) {
+                message = 'BAGUS! Terus belajar ya! 📚';
+                sticker = '😊👍📖';
+            } else {
+                message = 'Semangat! Coba lagi ya! 💪';
+                sticker = '🌈💪📚';
+            }
+            
+            finalScore.innerHTML = `
+                <div style="font-size: 3em; margin-bottom: 15px;">${sticker}</div>
+                <h2 style="color: #d63031; margin-bottom: 10px;">Nilai Kamu: ${totalScore}</h2>
+                <p style="font-size: 1.3em; color: #6c5ce7; margin-bottom: 20px;">${message}</p>
+                <button class="interactive-button" onclick="startGame()">🔄 Main Lagi</button>
+            `;
+            
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>
