@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurikulum Bahasa Indonesia SMA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease;
+        }
+
+        .tab-btn {
+            background: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            color: #667eea;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .card-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .card ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .card li {
+            padding: 8px 0;
+            color: #555;
+            border-bottom: 1px solid #eee;
+        }
+
+        .card li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .psikologi-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .psikologi-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        .age-group {
+            margin: 25px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .age-group:hover {
+            transform: scale(1.02);
+        }
+
+        .age-group h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .strategi-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .interactive-quiz {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .quiz-question {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .quiz-option {
+            padding: 12px 20px;
+            margin: 10px 0;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(10px);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .tab-btn {
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Kurikulum Bahasa Indonesia SMA</h1>
+            <p>Dirancang Berdasarkan Psikologi & Kebutuhan Siswa</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('psikologi')">🧠 Psikologi Siswa</button>
+            <button class="tab-btn" onclick="showTab('kelas10')">📖 Kelas X</button>
+            <button class="tab-btn" onclick="showTab('kelas11')">📝 Kelas XI</button>
+            <button class="tab-btn" onclick="showTab('kelas12')">🎓 Kelas XII</button>
+            <button class="tab-btn" onclick="showTab('metode')">🎯 Metode Pembelajaran</button>
+        </div>
+
+        <!-- Psikologi Siswa -->
+        <div id="psikologi" class="content-section active">
+            <div class="psikologi-section">
+                <h2>🧠 Pemahaman Psikologi Siswa SMA</h2>
+                
+                <div class="age-group">
+                    <h3>Kelas X (15-16 Tahun) - Fase Transisi</h3>
+                    <div class="strategi-box">
+                        <strong>Karakteristik:</strong>
+                        <p>Masa transisi dari SMP, mencari identitas diri, mulai berpikir abstrak, mudah terpengaruh teman sebaya.</p>
+                    </div>
+                    <div class="strategi-box">
+                        <strong>Strategi Pembelajaran:</strong>
+                        <p>✓ Pembelajaran kolaboratif dan diskusi kelompok<br>
+                        ✓ Materi yang relevan dengan kehidupan sehari-hari<br>
+                        ✓ Penggunaan media sosial dan teknologi<br>
+                        ✓ Memberikan ruang untuk eksplorasi kreativitas</p>
+                    </div>
+                </div>
+
+                <div class="age-group">
+                    <h3>Kelas XI (16-17 Tahun) - Fase Konsolidasi</h3>
+                    <div class="strategi-box">
+                        <strong>Karakteristik:</strong>
+                        <p>Mulai stabil secara emosional, berpikir lebih kritis, tertarik pada isu sosial, membangun argumen logis.</p>
+                    </div>
+                    <div class="strategi-box">
+                        <strong>Strategi Pembelajaran:</strong>
+                        <p>✓ Pembelajaran berbasis proyek dan penelitian<br>
+                        ✓ Debat dan diskusi isu kontemporer<br>
+                        ✓ Analisis teks kritis<br>
+                        ✓ Mendorong kemampuan argumentasi</p>
+                    </div>
+                </div>
+
+                <div class="age-group">
+                    <h3>Kelas XII (17-18 Tahun) - Fase Persiapan</h3>
+                    <div class="strategi-box">
+                        <strong>Karakteristik:</strong>
+                        <p>Fokus pada masa depan, dewasa dalam berpikir, mandiri, siap menghadapi tantangan perguruan tinggi.</p>
+                    </div>
+                    <div class="strategi-box">
+                        <strong>Strategi Pembelajaran:</strong>
+                        <p>✓ Pembelajaran mandiri dan riset mendalam<br>
+                        ✓ Simulasi situasi akademik tingkat lanjut<br>
+                        ✓ Pengembangan portofolio karya<br>
+                        ✓ Persiapan keterampilan akademik universitas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kelas X -->
+        <div id="kelas10" class="content-section">
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">📖</div>
+                    <h3>Teks Laporan Hasil Observasi</h3>
+                    <p><strong>Pendekatan Psikologis:</strong> Memanfaatkan keingintahuan natural remaja</p>
+                    <ul>
+                        <li>Observasi lingkungan sekitar siswa</li>
+                        <li>Kolaborasi dalam kelompok</li>
+                        <li>Presentasi interaktif</li>
+                        <li>Penggunaan multimedia</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">✍️</div>
+                    <h3>Teks Eksposisi</h3>
+                    <p><strong>Pendekatan Psikologis:</strong> Membentuk kemampuan berpendapat</p>
+                    <ul>
+                        <li>Diskusi isu yang relevan</li>
+                        <li>Debat mini</li>
+                        <li>Menulis opini di media sosial edukatif</li>
+                        <li>Analisis berita terkini</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📜</div>
+                    <h3>Teks Anekdot</h3>
+                    <p><strong>Pendekatan Psikologis:</strong> Humor sebagai media pembelajaran</p>
+                    <ul>
+                        <li>Storytelling personal</li>
+                        <li>Kreativitas dalam bercerita</li>
+                        <li>Mengaitkan dengan pengalaman siswa</li>
+                        <li>Stand-up comedy edukatif</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>Teks Negosiasi</h3>
+                    <p><strong>Pendekatan Psikologis:</strong> Soft skills untuk masa depan</p>
+                    <ul>
+                        <li>Role play situasi nyata</li>
+                        <li>Simulasi negosiasi bisnis</li>
+                        <li>Pengembangan empati</li>
+                        <li>Komunikasi persuasif</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kelas XI -->
+        <div id="kelas11" class="content-section">
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">📰</div>
+                    <h3>Teks Prosedur</h3>
+                    <p><strong>Pendekatan Psikologis:</strong> Pembelajaran praktis dan aplikatif</p>
+                    <ul>
+                        <li>Tutorial video</li>
+                        <li>Infografis prosedur</li>
+                        <li>Praktek langsung</li>
+                        <li>Peer teaching</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📚</div>
+                    <h3>Teks Eksplanasi</h3>
+                    <p><strong>Pendekatan Psikologis:</strong> Memuaskan rasa ingin tahu mendalam</p>
+                    <ul>
+                        <li>Eksplorasi fenomena alam & sosial</li>
+                        <li>Video pembelajaran</li>
+                        <li>Diagram sebab-akibat</li>
+                        <li>Diskusi ilmiah</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🎭</div>
+                    <h3>Teks Drama</h3>
+                    <p><strong>Pendekatan Psikologis:</strong> Ekspresi diri dan empati</p>
+                    <ul>
+                        <li>Pentas teater mini</li>
+                        <li>Naskah kolaboratif</li>
+                        <li>Interpretasi karakter</li>
+                        <li>Rekaman video drama</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📖</div>
+                    <h3>Teks Resensi</h3>
+                    <p><strong>Pendekatan Psikologis:</strong> Berpikir kritis dan analitis</p>
+                    <ul>
+                        <li>Book club siswa</li>
+                        <li>Review film & buku</li>
+                        <li>Vlog resensi</li>
+                        <li>Kritik konstruktif</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kelas XII -->
+        <div id="kelas12" class="content-section">
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">💼</div>
+                    <h3>Surat Lamaran Pekerjaan</h3>
+                    <p><strong>Pendekatan Psikologis:</strong> Persiapan dunia kerja</p>
+                    <ul>
+                        <li>Workshop CV writing</li>
+                        <li>Mock interview</li>
+                        <li>Personal branding</li>
+                        <li>Kunjungan industri</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📝</div>
+                    <h3>Teks Cerita Sejarah</h3>
+                    <p><strong>Pendekatan Psikologis:</strong> Membangun identitas nasional</p>
+                    <ul>
+                        <li>Film dokumenter</li>
+                        <li>Storytelling interaktif</li>
+                        <li>Kunjungan museum virtual</li>
+                        <li>Timeline digital</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🎨</div>
+                    <h3>Teks Editorial</h3>
+                    <p><strong>Pendekatan Psikologis:</strong> Kepedulian sosial & politik</p>
+                    <ul>
+                        <li>Analisis berita terkini</li>
+                        <li>Menulis opini</li>
+                        <li>Diskusi isu nasional</li>
+                        <li>Media literacy</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">📚</div>
+                    <h3>Teks Ilmiah</h3>
+                    <p><strong>Pendekatan Psikologis:</strong> Persiapan akademik perguruan tinggi</p>
+                    <ul>
+                        <li>Penelitian mini</li>
+                        <li>Seminar siswa</li>
+                        <li>Publikasi karya ilmiah</li>
+                        <li>Jurnal online siswa</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metode Pembelajaran -->
+        <div id="metode" class="content-section">
+            <div class="interactive-quiz">
+                <h2 style="color: #667eea; text-align: center; margin-bottom: 30px;">🎯 Metode Pembelajaran Inovatif</h2>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-icon">🤝</div>
+                        <h3>Collaborative Learning</h3>
+                        <p>Memanfaatkan kebutuhan sosial remaja untuk belajar bersama</p>
+                        <ul>
+                            <li>Diskusi kelompok</li>
+                            <li>Peer teaching</li>
+                            <li>Proyek tim</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">📱</div>
+                        <h3>Digital Learning</h3>
+                        <p>Mengintegrasikan teknologi yang akrab bagi siswa</p>
+                        <ul>
+                            <li>E-learning platform</li>
+                            <li>Gamifikasi</li>
+                            <li>Video pembelajaran</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">🎭</div>
+                        <h3>Experiential Learning</h3>
+                        <p>Belajar melalui pengalaman langsung</p>
+                        <ul>
+                            <li>Role play</li>
+                            <li>Field trip</li>
+                            <li>Simulasi</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">🎨</div>
+                        <h3>Creative Expression</h3>
+                        <p>Memberikan ruang untuk kreativitas siswa</p>
+                        <ul>
+                            <li>Project-based learning</li>
+                            <li>Portofolio digital</li>
+                            <li>Multimedia presentation</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">🧩</div>
+                        <h3>Problem-Based Learning</h3>
+                        <p>Mengembangkan critical thinking</p>
+                        <ul>
+                            <li>Case study</li>
+                            <li>Research project</li>
+                            <li>Solution design</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">🌟</div>
+                        <h3>Differentiated Learning</h3>
+                        <p>Mengakomodasi gaya belajar berbeda</p>
+                        <ul>
+                            <li>Visual aids</li>
+                            <li>Audio materials</li>
+                            <li>Kinesthetic activities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all content sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
