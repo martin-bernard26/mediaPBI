@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurikulum Bahasa Indonesia Berbasis Kognitif</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #667eea;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-card.active {
+            display: block;
+        }
+
+        .level-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .level-icon {
+            font-size: 3em;
+        }
+
+        .level-info h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .cognitive-stage {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            font-size: 1.2em;
+        }
+
+        .kompetensi-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .kompetensi-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .kompetensi-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .kompetensi-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .kompetensi-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .materi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .materi-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .materi-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .materi-card h4 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .cognitive-note {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .cognitive-note h4 {
+            color: #856404;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cognitive-note p {
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-card {
+                padding: 20px;
+            }
+
+            .tab-btn {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+
+            .materi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Kurikulum Bahasa Indonesia</h1>
+            <p class="subtitle">Berbasis Perkembangan Kognitif (Teori Piaget & Vygotsky)</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('sd')">🎒 SD (Kelas 1-6)</button>
+            <button class="tab-btn" onclick="showTab('smp')">📖 SMP (Kelas 7-9)</button>
+            <button class="tab-btn" onclick="showTab('sma')">🎓 SMA (Kelas 10-12)</button>
+        </div>
+
+        <!-- SD Content -->
+        <div id="sd" class="content-card active">
+            <div class="level-header">
+                <div class="level-icon">🎒</div>
+                <div class="level-info">
+                    <h2>Sekolah Dasar (SD)</h2>
+                    <span class="cognitive-stage">Tahap Operasional Konkret (7-11 tahun)</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="section-icon">🧠</span>Karakteristik Kognitif</h3>
+                <div class="kompetensi-item">
+                    <div class="kompetensi-desc">
+                        Siswa SD berada dalam tahap operasional konkret dimana mereka mulai berpikir logis tentang objek konkret. Mereka memahami konsep melalui pengalaman langsung dan contoh nyata. Pembelajaran bahasa difokuskan pada pengalaman sehari-hari yang dapat diamati dan dialami langsung.
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="section-icon">🎯</span>Kompetensi Utama</h3>
+                <div class="kompetensi-list">
+                    <div class="kompetensi-item">
+                        <div class="kompetensi-title">1. Menyimak (Listening)</div>
+                        <div class="kompetensi-desc">Mendengarkan cerita, dongeng, instruksi sederhana, dan percakapan sehari-hari dengan fokus memahami ide pokok dan informasi faktual.</div>
+                    </div>
+                    <div class="kompetensi-item">
+                        <div class="kompetensi-title">2. Berbicara (Speaking)</div>
+                        <div class="kompetensi-desc">Menceritakan pengalaman, menyampaikan pendapat sederhana, dan berkomunikasi dalam situasi sehari-hari dengan bahasa yang santun.</div>
+                    </div>
+                    <div class="kompetensi-item">
+                        <div class="kompetensi-title">3. Membaca (Reading)</div>
+                        <div class="kompetensi-desc">Membaca nyaring, memahami bacaan sederhana, dan mengenali unsur cerita (tokoh, latar, alur sederhana).</div>
+                    </div>
+                    <div class="kompetensi-item">
+                        <div class="kompetensi-title">4. Menulis (Writing)</div>
+                        <div class="kompetensi-desc">Menulis kalimat sederhana, paragraf pendek, dan karangan narasi berdasarkan pengalaman dengan struktur yang sistematis.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="section-icon">📝</span>Materi Pembelajaran</h3>
+                <div class="materi-grid">
+                    <div class="materi-card">
+                        <h4>Kelas 1-2</h4>
+                        <p>Huruf, kata, kalimat sederhana, cerita bergambar, puisi anak</p>
+                    </div>
+                    <div class="materi-card">
+                        <h4>Kelas 3-4</h4>
+                        <p>Paragraf, dongeng, pantun, surat pribadi, laporan sederhana</p>
+                    </div>
+                    <div class="materi-card">
+                        <h4>Kelas 5-6</h4>
+                        <p>Karangan, drama pendek, pidato, wawancara, teks deskripsi</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cognitive-note">
+                <h4>💡 Strategi Pembelajaran Kognitif</h4>
+                <p>
+                    <strong>• Pembelajaran Konkret:</strong> Gunakan objek nyata, gambar, dan pengalaman langsung.<br>
+                    <strong>• Scaffolding:</strong> Berikan bantuan bertahap sesuai zona perkembangan proksimal siswa.<br>
+                    <strong>• Pembelajaran Aktif:</strong> Libatkan siswa dalam bermain peran, bercerita, dan aktivitas interaktif.<br>
+                    <strong>• Penguatan Positif:</strong> Berikan apresiasi untuk membangun kepercayaan diri berbahasa.
+                </p>
+            </div>
+        </div>
+
+        <!-- SMP Content -->
+        <div id="smp" class="content-card">
+            <div class="level-header">
+                <div class="level-icon">📖</div>
+                <div class="level-info">
+                    <h2>Sekolah Menengah Pertama (SMP)</h2>
+                    <span class="cognitive-stage">Transisi ke Operasional Formal (11-15 tahun)</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="section-icon">🧠</span>Karakteristik Kognitif</h3>
+                <div class="kompetensi-item">
+                    <div class="kompetensi-desc">
+                        Siswa SMP memasuki masa transisi menuju pemikiran operasional formal. Mereka mulai mampu berpikir abstrak, hipotetis, dan logis. Mereka dapat memahami konsep bahasa yang lebih kompleks, menganalisis teks, dan mulai mengembangkan pemikiran kritis. Pembelajaran mulai mengintegrasikan konsep konkret dengan abstrak.
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="section-icon">🎯</span>Kompetensi Utama</h3>
+                <div class="kompetensi-list">
+                    <div class="kompetensi-item">
+                        <div class="kompetensi-title">1. Menyimak & Memirsa</div>
+                        <div class="kompetensi-desc">Memahami berbagai jenis teks lisan dan audiovisual (berita, wawancara, film pendek) dengan mengidentifikasi informasi penting dan pesan tersirat.</div>
+                    </div>
+                    <div class="kompetensi-item">
+                        <div class="kompetensi-title">2. Berbicara & Mempresentasikan</div>
+                        <div class="kompetensi-desc">Menyampaikan pendapat, argumentasi sederhana, dan presentasi dengan struktur yang jelas menggunakan bahasa yang efektif.</div>
+                    </div>
+                    <div class="kompetensi-item">
+                        <div class="kompetensi-title">3. Membaca & Memahami</div>
+                        <div class="kompetensi-desc">Membaca dan menganalisis berbagai teks (narasi, eksposisi, deskripsi, argumentasi) dengan memahami struktur, unsur kebahasaan, dan makna.</div>
+                    </div>
+                    <div class="kompetensi-item">
+                        <div class="kompetensi-title">4. Menulis Kreatif & Fungsional</div>
+                        <div class="kompetensi-desc">Menulis berbagai jenis teks (cerita, artikel, surat resmi, laporan) dengan memperhatikan struktur, EYD, dan kaidah kebahasaan.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="section-icon">📝</span>Materi Pembelajaran</h3>
+                <div class="materi-grid">
+                    <div class="materi-card">
+                        <h4>Kelas 7</h4>
+                        <p>Teks deskripsi, narasi, prosedur, laporan observasi, surat pribadi & dinas</p>
+                    </div>
+                    <div class="materi-card">
+                        <h4>Kelas 8</h4>
+                        <p>Berita, iklan, eksposisi, puisi, drama, biografi, ulasan</p>
+                    </div>
+                    <div class="materi-card">
+                        <h4>Kelas 9</h4>
+                        <p>Teks laporan percobaan, pidato persuasif, diskusi, cerita inspiratif, tanggapan</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cognitive-note">
+                <h4>💡 Strategi Pembelajaran Kognitif</h4>
+                <p>
+                    <strong>• Pemikiran Kritis:</strong> Dorong siswa menganalisis, mengevaluasi, dan membandingkan teks.<br>
+                    <strong>• Pembelajaran Kolaboratif:</strong> Diskusi kelompok untuk mengembangkan pemahaman sosial-kognitif.<br>
+                    <strong>• Metakognisi:</strong> Ajak siswa merefleksikan proses belajar dan strategi pemahaman mereka.<br>
+                    <strong>• Konteks Relevan:</strong> Hubungkan materi dengan isu remaja dan lingkungan sekitar.
+                </p>
+            </div>
+        </div>
+
+        <!-- SMA Content -->
+        <div id="sma" class="content-card">
+            <div class="level-header">
+                <div class="level-icon">🎓</div>
+                <div class="level-info">
+                    <h2>Sekolah Menengah Atas (SMA)</h2>
+                    <span class="cognitive-stage">Tahap Operasional Formal Penuh (15+ tahun)</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="section-icon">🧠</span>Karakteristik Kognitif</h3>
+                <div class="kompetensi-item">
+                    <div class="kompetensi-desc">
+                        Siswa SMA telah mencapai tahap operasional formal penuh dengan kemampuan berpikir abstrak, hipotetis-deduktif, dan reflektif. Mereka mampu menganalisis isu kompleks, berpikir secara sistematis, memahami berbagai perspektif, dan mengembangkan argumen yang sophisticated. Pembelajaran menekankan pada analisis kritis, kreativitas, dan literasi tingkat tinggi.
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="section-icon">🎯</span>Kompetensi Utama</h3>
+                <div class="kompetensi-list">
+                    <div class="kompetensi-item">
+                        <div class="kompetensi-title">1. Literasi Kritis</div>
+                        <div class="kompetensi-desc">Menganalisis, mengevaluasi, dan menginterpretasi berbagai teks kompleks (esai, artikel ilmiah, teks sastra) dengan memahami ideologi, bias, dan konteks sosial-budaya.</div>
+                    </div>
+                    <div class="kompetensi-item">
+                        <div class="kompetensi-title">2. Komunikasi Akademik</div>
+                        <div class="kompetensi-desc">Menyampaikan ide kompleks melalui presentasi akademik, debat, dan diskusi formal dengan argumentasi yang solid dan data pendukung.</div>
+                    </div>
+                    <div class="kompetensi-item">
+                        <div class="kompetensi-title">3. Analisis Sastra & Teks</div>
+                        <div class="kompetensi-desc">Mengapresiasi dan menganalisis karya sastra (novel, cerpen, puisi, drama) dengan memahami unsur intrinsik, ekstrinsik, dan nilai-nilai yang terkandung.</div>
+                    </div>
+                    <div class="kompetensi-item">
+                        <div class="kompetensi-title">4. Penulisan Akademik & Kreatif</div>
+                        <div class="kompetensi-desc">Menulis esai akademik, artikel ilmiah populer, karya kreatif, dan teks argumentatif dengan struktur logis, bahasa efektif, dan referensi yang tepat.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="section-icon">📝</span>Materi Pembelajaran</h3>
+                <div class="materi-grid">
+                    <div class="materi-card">
+                        <h4>Kelas 10</h4>
+                        <p>Teks laporan, eksposisi, anekdot, hikayat, negosiasi, biografi, prosedur kompleks</p>
+                    </div>
+                    <div class="materi-card">
+                        <h4>Kelas 11</h4>
+                        <p>Teks prosedur, eksplanasi, ceramah, cerpen, novel, resensi, proposal</p>
+                    </div>
+                    <div class="materi-card">
+                        <h4>Kelas 12</h4>
+                        <p>Surat lamaran, esai, artikel ilmiah, kritik sastra, editorial, karya ilmiah</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cognitive-note">
+                <h4>💡 Strategi Pembelajaran Kognitif</h4>
+                <p>
+                    <strong>• Pemikiran Tingkat Tinggi:</strong> Fokus pada analisis, sintesis, dan evaluasi (Taksonomi Bloom).<br>
+                    <strong>• Pembelajaran Berbasis Inquiry:</strong> Dorong siswa meneliti dan mengeksplorasi topik secara mandiri.<br>
+                    <strong>• Multimodal Learning:</strong> Integrasikan teks, visual, audio, dan digital untuk pemahaman mendalam.<br>
+                    <strong>• Autentik & Kontekstual:</strong> Hubungkan dengan isu global, karir, dan persiapan perguruan tinggi.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(level) {
+            // Hide all content cards
+            const cards = document.querySelectorAll('.content-card');
+            cards.forEach(card => card.classList.remove('active'));
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected content
+            document.getElementById(level).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Add hover effect to kompetensi items
+        document.addEventListener('DOMContentLoaded', function() {
+            const items = document.querySelectorAll('.kompetensi-item');
+            items.forEach(item => {
+                item.addEventListener('click', function() {
+                    this.style.background = '#e3f2fd';
+                    setTimeout(() => {
+                        this.style.background = '#f8f9fa';
+                    }, 300);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
