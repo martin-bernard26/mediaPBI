@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Hasil UAS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --accent: #14b8a6;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-light: #f1f5f9;
+            --text-gray: #94a3b8;
+            --success: #10b981;
+            --error: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            top: -200px;
+            left: -200px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(100px, -100px) scale(1.1);
+            }
+            66% {
+                transform: translate(-100px, 100px) scale(0.9);
+            }
+        }
+
+        /* Grid Pattern */
+        .grid-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 60px rgba(99, 102, 241, 0.6);
+            }
+        }
+
+        .title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 42px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: var(--text-gray);
+            font-size: 16px;
+            font-weight: 300;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form Card */
+        .form-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: slideUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 28px;
+            animation: fadeIn 0.6s ease-out both;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.3s; }
+        .form-group:nth-child(2) { animation-delay: 0.4s; }
+        .form-group:nth-child(3) { animation-delay: 0.5s; }
+        .form-group:nth-child(4) { animation-delay: 0.6s; }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            color: var(--text-light);
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--primary);
+            background: rgba(15, 23, 42, 0.9);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            transform: translateY(-2px);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: var(--text-gray);
+        }
+
+        /* Icon in input */
+        .input-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        input:focus + .input-icon,
+        textarea:focus + .input-icon {
+            opacity: 0.5;
+        }
+
+        /* Error Message */
+        .error-message {
+            color: var(--error);
+            font-size: 13px;
+            margin-top: 6px;
+            display: none;
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .form-group.error input,
+        .form-group.error textarea {
+            border-color: var(--error);
+            animation: shake 0.4s ease;
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .submit-btn.loading .btn-text {
+            display: none;
+        }
+
+        .submit-btn.loading .spinner {
+            display: block;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--success);
+            border-radius: 16px;
+            margin-top: 20px;
+            animation: slideUp 0.5s ease;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .success-message h3 {
+            color: var(--success);
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .success-message p {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--text-gray);
+            font-size: 14px;
+            animation: fadeIn 1s ease 0.8s both;
+        }
+
+        /* Particles */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 32px;
+            }
+            
+            .form-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+    <div class="grid-pattern"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">UAS</div>
+            <h1 class="title">Submit UAS</h1>
+            <p class="subtitle">Kirimkan hasil ujian akhir semester Anda</p>
+        </div>
+
+        <div class="form-card">
+            <form id="uasForm">
+                <div class="form-group">
+                    <label for="nama">Nama Lengkap</label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            id="nama" 
+                            name="nama" 
+                            placeholder="Masukkan nama lengkap Anda"
+                            required
+                        >
+                        <span class="input-icon">✓</span>
+                    </div>
+                    <div class="error-message">Nama harus diisi</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="nim">NIM (Nomor Induk Mahasiswa)</label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            id="nim" 
+                            name="nim" 
+                            placeholder="Contoh: 123456789"
+                            required
+                        >
+                        <span class="input-icon">✓</span>
+                    </div>
+                    <div class="error-message">NIM harus diisi</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="alamat">Alamat</label>
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="alamat" 
+                            name="alamat" 
+                            placeholder="Masukkan alamat lengkap Anda"
+                            required
+                        ></textarea>
+                        <span class="input-icon">✓</span>
+                    </div>
+                    <div class="error-message">Alamat harus diisi</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="linkTugas">Link Hasil Tugas UAS</label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="url" 
+                            id="linkTugas" 
+                            name="linkTugas" 
+                            placeholder="https://drive.google.com/..."
+                            required
+                        >
+                        <span class="input-icon">✓</span>
+                    </div>
+                    <div class="error-message">Link harus valid (dimulai dengan http:// atau https://)</div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">Kirim Sekarang</span>
+                    <div class="spinner"></div>
+                </button>
+            </form>
+
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">🎉</div>
+                <h3>Berhasil Dikirim!</h3>
+                <p>Data UAS Anda telah berhasil dikirim ke Google Form</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 Sistem UAS | Martin Bernard</p>
+        </div>
+    </div>
+
+    <script>
+        // Form Handling
+        const form = document.getElementById('uasForm');
+        const submitBtn = form.querySelector('.submit-btn');
+        const successMessage = document.getElementById('successMessage');
+
+        // Input Animation
+        const inputs = document.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.parentElement.classList.remove('error');
+            });
+
+            input.addEventListener('blur', function() {
+                if (this.value.trim() !== '') {
+                    this.style.borderColor = 'var(--success)';
+                }
+            });
+        });
+
+        // Form Validation
+        function validateForm() {
+            let isValid = true;
+            const formGroups = form.querySelectorAll('.form-group');
+
+            formGroups.forEach(group => {
+                const input = group.querySelector('input, textarea');
+                if (!input.value.trim()) {
+                    group.classList.add('error');
+                    isValid = false;
+                } else {
+                    group.classList.remove('error');
+                }
+            });
+
+            // Validate URL
+            const linkInput = document.getElementById('linkTugas');
+            const urlPattern = /^https?:\/\/.+/;
+            if (!urlPattern.test(linkInput.value)) {
+                linkInput.parentElement.parentElement.classList.add('error');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // Create Particles Effect
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            document.body.appendChild(particle);
+
+            const angle = Math.random() * Math.PI * 2;
+            const velocity = 2 + Math.random() * 3;
+            const vx = Math.cos(angle) * velocity;
+            const vy = Math.sin(angle) * velocity;
+
+            let px = x;
+            let py = y;
+            let opacity = 1;
+
+            function animate() {
+                px += vx;
+                py += vy;
+                opacity -= 0.02;
+
+                particle.style.left = px + 'px';
+                particle.style.top = py + 'px';
+                particle.style.opacity = opacity;
+
+                if (opacity > 0) {
+                    requestAnimationFrame(animate);
+                } else {
+                    particle.remove();
+                }
+            }
+
+            particle.style.opacity = 1;
+            animate();
+        }
+
+        // Form Submission
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!validateForm()) {
+                return;
+            }
+
+            // Create particles on submit
+            const rect = submitBtn.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => createParticle(centerX, centerY), i * 30);
+            }
+
+            // Show loading state
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+
+            // Get form data
+            const formData = new FormData(form);
+            const data = {
+                nama: formData.get('nama'),
+                nim: formData.get('nim'),
+                alamat: formData.get('alamat'),
+                linkTugas: formData.get('linkTugas')
+            };
+
+            // INSTRUKSI PENTING: 
+            // Ganti URL di bawah ini dengan URL Google Form Anda
+            // Format URL: https://docs.google.com/forms/d/e/FORM_ID/formResponse
+            // Dan sesuaikan entry ID dengan field di Google Form Anda
+            
+            const GOOGLE_FORM_ACTION_URL = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLScuUZv_zROQlCzUws8HNgA_Ry9cGLTwreit6HL21hsv20TIXw/formResponse';
+            
+            // Mapping field ke entry ID Google Form
+            // Untuk mendapatkan entry ID:
+            // 1. Buka Google Form Anda
+            // 2. Klik "Preview" (ikon mata)
+            // 3. Klik kanan pada field pertama > Inspect
+            // 4. Cari attribute "name" yang formatnya seperti "entry.123456789"
+            const formBody = new URLSearchParams({
+                'entry.974959906': data.nama,        // Ganti XXXXXX dengan entry ID untuk Nama
+                'entry.1370787927': data.nim,         // Ganti YYYYYY dengan entry ID untuk NIM
+                'entry.1059836739': data.alamat,      // Ganti ZZZZZZ dengan entry ID untuk Alamat
+                'entry.1065186361': data.linkTugas    // Ganti WWWWWW dengan entry ID untuk Link
+            });
+
+            try {
+                // Simulate API call (replace with actual Google Form submission)
+                await fetch(GOOGLE_FORM_ACTION_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Google Forms requires no-cors mode
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: formBody
+                });
+
+                // Simulate delay for demo
+                await new Promise(resolve => setTimeout(resolve, 1500));
+
+                // Hide form and show success message
+                form.style.display = 'none';
+                successMessage.classList.add('show');
+
+                // Reset form after delay
+                setTimeout(() => {
+                    form.style.display = 'block';
+                    successMessage.classList.remove('show');
+                    form.reset();
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+                    
+                    // Reset input colors
+                    inputs.forEach(input => {
+                        input.style.borderColor = 'rgba(99, 102, 241, 0.3)';
+                    });
+                }, 3000);
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan saat mengirim data. Silakan coba lagi.');
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Cursor Trail Effect
+        let mouseX = 0;
+        let mouseY = 0;
+        let trailTimeout;
+
+        document.addEventListener('mousemove', function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            clearTimeout(trailTimeout);
+            trailTimeout = setTimeout(() => {
+                if (Math.random() > 0.95) {
+                    createParticle(mouseX, mouseY);
+                }
+            }, 50);
+        });
+
+        // Add floating animation to form card on hover
+        const formCard = document.querySelector('.form-card');
+        formCard.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+            this.style.transition = 'transform 0.3s ease';
+        });
+
+        formCard.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    </script>
+</body>
+</html>
